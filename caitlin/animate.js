@@ -1,10 +1,3 @@
-/*
-  Caitlin Stanton
-  SoftDev pd 3
-  HW 3 -- Are We Ever Going to Start the Movie?
-  2016-02-22
-*/
-
 var c = document.getElementById("playground");
 var ctx = c.getContext("2d");
 var beginButton = document.getElementById("begin");
@@ -30,6 +23,7 @@ var beginBounce = function beginBounce() {
 	ctx.stroke();
     //ctx.fill();
 	requestID = window.requestAnimationFrame(beginBounce);
+	clearRect();
 }
 
 //Clears entire canvas from previous animation
