@@ -10,11 +10,20 @@ canvas.width = width;
 canvas.height = height;
 var context = canvas.getContext('2d');
 
+var score1 = document.createElement('div');
+score1.setAttribute("id","score1");
+//document.querySelector("#score1").innerHTML = "Player 1: ";
+var score2 = document.createElement('div');
+score2.setAttribute("id","score2");
+//document.querySelector("#score2").innerHTML = "Player 2: ";
+
 var player1Score = 0;
 var player2Score = 0;
 
 window.onload = function() {
   document.body.appendChild(canvas);
+  document.body.appendChild(score1);
+  document.body.appendChild(score2);
   animate(step);
 };
 
@@ -106,12 +115,13 @@ Ball.prototype.update = function(paddle1, paddle2) {
   if(this.x - 5 < 0) { // hitting the left wall
     this.x = 5;
     this.x_speed = -this.x_speed;
-    document.querySelector('.score .player1').innerHTML = player1Score;
+    player1Score++;
+    score('#score1',player1Score);
   } else if(this.x + 5 > 600) { // hitting the right wall
     this.x = 595;
     this.x_speed = -this.x_speed;
-    player2++;
-    document.querySelector('.score .player2').innerHTML = player2Score;
+    player2Score++;
+    score('#score2',player2Score);
   }
 
   if(this.y < 0 || this.y > 600) { // a point was scored
@@ -136,4 +146,15 @@ Ball.prototype.update = function(paddle1, paddle2) {
       this.y += this.y_speed;
     }
   }
+};
+
+var score = function(player,score) {
+	var name;
+	if (player = '#score1') {
+		name = "Player 1: ";
+	}
+	if (player = '#score2'){
+		name = "Player 2: ";
+	}
+	document.querySelector(player).innerHTML = name + score;
 };
