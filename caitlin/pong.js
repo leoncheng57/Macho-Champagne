@@ -3,26 +3,24 @@ var animate = window.requestAnimationFrame ||
   window.mozRequestAnimationFrame ||
   function(callback) { window.setTimeout(callback, 1000/60) };
 
-var canvas = document.getElementById('canvas');
+var canvas = document.createElement('canvas');
+var width = 600;
+var height = 400;
 canvas.width = width;
 canvas.height = height;
 var context = canvas.getContext('2d');
 
-var start = document.getElementById('start');
-
 var player1Score = 0;
 var player2Score = 0;
 
-
-start.addEventListener("click", start);
+window.onload = function() {
+  document.body.appendChild(canvas);
+  animate(step);
+};
 
 var step = function() {
   update();
   render();
-  animate(step);
-};
-
-var start = function() {
   animate(step);
 };
 
