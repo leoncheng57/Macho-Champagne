@@ -1,6 +1,6 @@
 # Macho-Champagne
 
-## Mr. Brown 
-## Software Development Class
+#### Mr. Brown
+###### Software Development Class
 
-### Create a game with Canvas/SVG
+Create a game with Canvas/SVG
