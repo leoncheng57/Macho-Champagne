@@ -11,16 +11,42 @@ console.log("hello");
 var c = document.getElementById("pad");
 var ctx = c.getContext("2d");
 
+var clear = function(){
+    ctx.clearRect(0, 0, c.width, c.height);
+};
 
-ctx.clearRect(0, 0, c.width, c.height);
-ctx.beginPath();
-ctx.fillStyle = "#ff6c24";
-ctx.rect(123, 213, 123, 12);
-ctx.stroke();
-ctx.fill();
-ctx.closePath();
+var drawRect = function drawRect(x, y){
+    ctx.clearRect(0, 0, c.width, c.height);
+    ctx.beginPath();
+    ctx.fillStyle = "#ff6c24";
+    ctx.rect(x, y, 123, 12);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+};
 
+setInterval(function(){
+    drawRect(100, 100);
+}, 500);
 
+var keyboardActions = function keyboardActions(e){
+    var k = e.keycode;
+    console.log(k);
+    if (k==37){ //left 
+	
+    }
+    else if (k==38){ //up
+
+    }
+    else if (k==39){ //right
+
+    }
+    else if (k==40){ //down
+
+    }
+}
+
+window.addEventListener("keydown", keyboardActions);
 
 
 console.log("gbye");
