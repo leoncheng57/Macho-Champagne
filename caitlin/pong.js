@@ -3,17 +3,18 @@ var animate = window.requestAnimationFrame ||
   window.mozRequestAnimationFrame ||
   function(callback) { window.setTimeout(callback, 1000/60) };
 
-var canvas = document.createElement('canvas');
-var width = 600;
-var height = 400;
+var canvas = document.getElementById('canvas');
 canvas.width = width;
 canvas.height = height;
 var context = canvas.getContext('2d');
 
-window.onload = function() {
-  document.body.appendChild(canvas);
-  animate(step);
-};
+var start = document.getElementById('start');
+
+var player1Score = 0;
+var player2Score = 0;
+
+
+start.addEventListener("click", start);
 
 var step = function() {
   update();
@@ -21,7 +22,8 @@ var step = function() {
   animate(step);
 };
 
-var update = function() {
+var start = function() {
+  animate(step);
 };
 
 var render = function() {
@@ -87,8 +89,6 @@ var render = function() {
 };
 
 var update = function() {
-  player1.update();
-  player2.update();
   ball.update(player1.paddle, player2.paddle);
 };
 
@@ -136,53 +136,3 @@ Ball.prototype.update = function(paddle1, paddle2) {
     }
   }
 };
-
-var keysDown = {};
-
-window.addEventListener("keydown", function(event) {
-  keysDown[event.keyCode] = true;
-});
-
-window.addEventListener("keyup", function(event) {
-  delete keysDown[event.keyCode];
-});
-
-Player1.prototype.update = function() {
-  for(var key in keysDown) {
-    var value = Number(key);
-    if(value == 87) { // left arrow
-      this.paddle.move(0, -4);
-    } else if (value == 83) { // right arrow
-      this.paddle.move(0, 4);
-    } else {
-      this.paddle.move(0, 0);
-    }
-  }
-};
-
-Player2.prototype.update = function() {
-  for(var key in keysDown) {
-    var value = Number(key);
-    if(value == 76) { // left arrow
-      this.paddle.move(0, -4);
-    } else if (value == 80) { // right arrow
-      this.paddle.move(0, 4);
-    } else {
-      this.paddle.move(0, 0);
-    }
-  }
-};
-
-Paddle.prototype.move = function(x, y) {
-  this.x += x;
-  this.y += y;
-  this.x_speed = x;
-  this.y_speed = y;
-  if(this.y < 0) { // all the way to the left
-    this.y = 0;
-    this.y_speed = 0;
-  } else if (this.y + this.height > 400) { // all the way to the right
-    this.y = 400 - this.height;
-    this.y_speed = 0;
-  }
-}
