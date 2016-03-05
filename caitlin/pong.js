@@ -106,9 +106,12 @@ Ball.prototype.update = function(paddle1, paddle2) {
   if(this.x - 5 < 0) { // hitting the left wall
     this.x = 5;
     this.x_speed = -this.x_speed;
+    document.querySelector('.score .player1').innerHTML = player1Score;
   } else if(this.x + 5 > 600) { // hitting the right wall
     this.x = 595;
     this.x_speed = -this.x_speed;
+    player2++;
+    document.querySelector('.score .player2').innerHTML = player2Score;
   }
 
   if(this.y < 0 || this.y > 600) { // a point was scored
