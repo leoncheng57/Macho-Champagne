@@ -12,13 +12,14 @@ var clearScreen = function(){
 };
 
 //initial x and y coors of the rect/paddle
-var x = 50;
-var y = 100;
+var x1 = 50;
+var y1 = 100;
+var x2 = 520;
+var y2 = 100;
 var width = 20;
 var height = 100;
 
 var drawRect = function(x, y){
-    ctx.clearRect(0, 0, c.width, c.height);
     ctx.beginPath();
     ctx.fillStyle = "#ff6c24";
     ctx.rect(x, y, width, height);
@@ -27,21 +28,22 @@ var drawRect = function(x, y){
     ctx.closePath();
 };
 
+// keys, keysPressed, keysReleased are used for keyboard actions
 var keys = [];
 
 function keysPressed(e){
     keys[e.keyCode] = true;
-    if (keys[37]){ //left
-	x-=15;
+    if (keys[38]){ //up
+	y1-=15;
     }
-    else if (keys[38]){ //up
-	y-=15;
+    if (keys[40]){ //down
+	y1+=15;
     }
-    else if (keys[39]){ //right
-	x+=15;
+    if (keys[87]){ //w
+	y2-=15;
     }
-    else if (keys[40]){ //down
-	y+=15;
+    if (keys[83]){ //s
+	y2+=15;
     }
     //e.preventDefault();
 }
@@ -50,38 +52,22 @@ function keysReleased(e){
     keys[e.keyCode] = false;
 }
 
+//Event Listeners for key pressing
 window.addEventListener("keydown", keysPressed);
 window.addEventListener("keyup", keysReleased);
 
-//Change the x, y coors depending on the arrow key pressed
-var keyboardActions = function keyboardActions(e){
-    var k = e.keyCode;
-    if (k==37){ //left 
-	x-=15;
-    }
-    else if (k==38){ //up
-	y-=15;
-    }
-    else if (k==39){ //right
-	x+=15;
-    }
-    else if (k==40){ //down
-	y+=15;
-    }
-}
-
-//Event listener for key presses
-//window.addEventListener("keydown", keyboardActions);
-
-//Repeatedly draw the rect/paddle
+//Method to call constantly
 function run(){
     clearScreen();
-    drawRect(x, y);
+    drawRect(x1, y1); //first paddle
+    drawRect(x2, y2); //second paddle
     //Print out the surface that will be in contact
-    console.log("paddle surface: ("+ (x+width) + ", " + y + ") to (" + (x+width) + ", " + (y+height) + ")");
+    console.log("paddle surface: ("+ (x1+width) + ", " + y1 + ") to (" + (x1+width) + ", " + (y1+height) + ")");
+    //Repeatedly draw the rect/paddle
+    window.requestAnimationFrame(run);
 };
 
-setInterval(run, 0);
+run();
 
 
 console.log("gbye");
