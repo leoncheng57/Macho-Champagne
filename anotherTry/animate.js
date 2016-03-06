@@ -44,16 +44,16 @@ var keys = [];
 function keysPressed(e){
     keys[e.keyCode] = true;
     if (keys[38]){ //up
-	y1-=15;
-    }
-    if (keys[40]){ //down
-	y1+=15;
-    }
-    if (keys[87]){ //w
 	y2-=15;
     }
-    if (keys[83]){ //s
+    if (keys[40]){ //down
 	y2+=15;
+    }
+    if (keys[87]){ //w
+	y1-=15;
+    }
+    if (keys[83]){ //s
+	y1+=15;
     }
     //e.preventDefault();
 }
@@ -90,14 +90,15 @@ function moveBall(){
     else
 	lx -= 2;
     //Change the direction when it hits the wall
+    if (ly <= 0 || ly >= c.height-lheight)
+	goingUp = !goingUp;
     if (lx <= 0 || lx >= c.width-lwidth)
 	goingRight = !goingRight;
+    //Change the direction when it hits the paddles
     if( lx-10 > x1 && lx-10 < x1+pwidth && ly > y1 && ly < y1+pheight )
 	goingRight = !goingRight;
     if( lx+10 > x2 && lx+10 < x2+pwidth && ly > y2 && ly < y2+pheight ) //note: the +10 is to detect the right side of the ball
 	goingRight = !goingRight;
-    if (ly <= 0 || ly >= c.height-lheight)
-	goingUp = !goingUp;
     //Draw the image
     drawBall(lx, ly);
 }
