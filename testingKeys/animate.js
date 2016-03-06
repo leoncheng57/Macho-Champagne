@@ -16,12 +16,14 @@ var x1 = 50;
 var y1 = 100;
 var x2 = 520;
 var y2 = 100;
+var pwidth = 20;
+var pheight = 100;
 var requestId;
 
 var drawPaddle = function(x, y){
     ctx.beginPath();
     ctx.fillStyle = "#ff6c24";
-    ctx.rect(x, y, 20, 100);
+    ctx.rect(x, y, pwidth, pheight);
     ctx.stroke();
     ctx.fill();
     ctx.closePath();
@@ -30,7 +32,7 @@ var drawPaddle = function(x, y){
 var drawBall = function(x, y){
     ctx.beginPath();
     ctx.fillStyle = "#ff6c24";
-    ctx.rect(x, y, 20, 20);
+    ctx.arc(x, y, 10, 0, 2*Math.PI);
     ctx.stroke();
     ctx.fill();
     ctx.closePath();
@@ -79,22 +81,25 @@ var ly = c.height/2 - lheight/2;
 function moveBall(){
     //Move in vertical direction
     if (goingUp)
-	ly += 1;
+	ly += 2;
     else
-	ly -= 1;
+	ly -= 2;
     //Move in horizontal directoin
     if (goingRight)
-	lx += 1;
+	lx += 2;
     else
-	lx -= 1;
+	lx -= 2;
     //Change the direction when it hits the wall
     if (lx <= 0 || lx >= c.width-lwidth)
+	goingRight = !goingRight;
+    if( lx-10 > x1 && lx-10 < x1+pwidth && ly > y1 && ly < y1+pheight )
+	goingRight = !goingRight;
+    if( lx+10 > x2 && lx+10 < x2+pwidth && ly > y2 && ly < y2+pheight ) //note: the +10 is to detect the right side of the ball
 	goingRight = !goingRight;
     if (ly <= 0 || ly >= c.height-lheight)
 	goingUp = !goingUp;
     //Draw the image
     drawBall(lx, ly);
-    //Periodically call the function
 }
 
 //Method to call constantly
