@@ -27,6 +27,32 @@ var drawRect = function(x, y){
     ctx.closePath();
 };
 
+var keys = [];
+
+function keysPressed(e){
+    keys[e.keyCode] = true;
+    if (keys[37]){ //left
+	x-=15;
+    }
+    else if (keys[38]){ //up
+	y-=15;
+    }
+    else if (keys[39]){ //right
+	x+=15;
+    }
+    else if (keys[40]){ //down
+	y+=15;
+    }
+    //e.preventDefault();
+}
+
+function keysReleased(e){
+    keys[e.keyCode] = false;
+}
+
+window.addEventListener("keydown", keysPressed);
+window.addEventListener("keyup", keysReleased);
+
 //Change the x, y coors depending on the arrow key pressed
 var keyboardActions = function keyboardActions(e){
     var k = e.keyCode;
@@ -45,15 +71,17 @@ var keyboardActions = function keyboardActions(e){
 }
 
 //Event listener for key presses
-window.addEventListener("keydown", keyboardActions);
+//window.addEventListener("keydown", keyboardActions);
 
 //Repeatedly draw the rect/paddle
-setInterval(function(){
+function run(){
     clearScreen();
     drawRect(x, y);
     //Print out the surface that will be in contact
     console.log("paddle surface: ("+ (x+width) + ", " + y + ") to (" + (x+width) + ", " + (y+height) + ")");
-}, 0);
+};
+
+setInterval(run, 0);
 
 
 console.log("gbye");
