@@ -16,21 +16,14 @@ var x1 = 50;
 var y1 = 100;
 var x2 = 520;
 var y2 = 100;
+var width = 20;
+var height = 100;
 var requestId;
 
-var drawPaddle = function(x, y){
+var drawRect = function(x, y){
     ctx.beginPath();
     ctx.fillStyle = "#ff6c24";
-    ctx.rect(x, y, 20, 100);
-    ctx.stroke();
-    ctx.fill();
-    ctx.closePath();
-};
-
-var drawBall = function(x, y){
-    ctx.beginPath();
-    ctx.fillStyle = "#ff6c24";
-    ctx.rect(x, y, 20, 20);
+    ctx.rect(x, y, width, height);
     ctx.stroke();
     ctx.fill();
     ctx.closePath();
@@ -64,6 +57,8 @@ function keysReleased(e){
 window.addEventListener("keydown", keysPressed);
 window.addEventListener("keyup", keysReleased);
 
+
+
 //CODE FOR LOGO
 
 //Booleans to keep track of direction of movement
@@ -76,7 +71,8 @@ var lwidth = 20;
 var lx = c.width/2 - lwidth/2;
 var ly = c.height/2 - lheight/2;
 
-function moveBall(){
+function drawBall(){
+    window.cancelAnimationFrame(requestId);
     //Move in vertical direction
     if (goingUp)
 	ly += 1;
@@ -90,20 +86,23 @@ function moveBall(){
     //Change the direction when it hits the wall
     if (lx <= 0 || lx >= c.width-lwidth)
 	goingRight = !goingRight;
-    if (ly <= 0 || ly >= c.height-lheight)
+    if(ly <= 0 || ly >= c.height-lheight)
 	goingUp = !goingUp;
     //Draw the image
-    drawBall(lx, ly);
+    drawRect(lx, ly);
     //Periodically call the function
+    window.requestAnimationFrame(drawBall);
 }
+drawBall();
 
 //Method to call constantly
 function run(){
-    window.cancelAnimationFrame(requestId);
     clearScreen();
-    drawPaddle(x1, y1); //first paddle
-    drawPaddle(x2, y2); //second paddle
-    moveBall();
+    drawBall();
+    drawRect(x1, y1); //first paddle
+    drawRect(x2, y2); //second paddle
+    //Print out the surface that will be in contact
+    console.log("paddle surface: ("+ (x1+width) + ", " + y1 + ") to (" + (x1+width) + ", " + (y1+height) + ")");
     //Repeatedly draw the rect/paddle
     requestId = window.requestAnimationFrame(run);
 };
