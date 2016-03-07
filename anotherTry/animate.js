@@ -108,7 +108,7 @@ function moveBall(){
 function score(){
     if (lx == 0){
         p2score += 1;
-        lx = 80d;
+        lx = 80;
         ly = y1 + 50;
     }
     if (lx == c.width - 20){
