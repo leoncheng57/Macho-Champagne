@@ -147,11 +147,11 @@ function speeddown(){
     speed --;
 }
 
-var speedUp = document.getElementByID("speedup");
-var speedDown = document.getElementByID("speeddown");
+var speedUp = document.getElementById("speedup");
+var speedDown = document.getElementById("speeddown");
 
-window.addEventListener("click", speedup);
-window.addEventListener("click", speeddown);
+speedUp.addEventListener("click", speedup);
+speedDown.addEventListener("click", speeddown);
 
 
 console.log("gbye");
