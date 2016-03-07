@@ -1,6 +1,6 @@
 var animate = window.requestAnimationFrame ||
   window.webkitRequestAnimationFrame ||
-  window.mozRequestAnimationFrame ||
+  window.mozRequestAnimationFrame ||d
   function(callback) { window.setTimeout(callback, 1000/60) };
 
 var canvas = document.createElement('canvas');
