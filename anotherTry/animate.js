@@ -11,7 +11,7 @@ var clearScreen = function(){
     ctx.clearRect(0, 0, c.width, c.height);
 };
 
-//initial x and y coors of the rect/paddle
+//lots of variables
 var x1 = 50;
 var y1 = 100;
 var x2 = 520;
@@ -21,6 +21,7 @@ var pheight = 100;
 var requestId;
 var p1score = 0;
 var p2score = 0;
+var speed = 3;
 
 var drawPaddle = function(x, y){
     ctx.beginPath();
@@ -80,21 +81,26 @@ var lwidth = 20;
 var lx = c.width/2 - lwidth/2;
 var ly = c.height/2 - lheight/2;
 
+
 function moveBall(){
     //Move in vertical direction
     if (goingUp)
-	ly += 2;
+	ly += speed;
     else
-	ly -= 2;
+	ly -= speed;
     //Move in horizontal directoin
     if (goingRight)
-	lx += 2;
+	lx += speed;
     else
-	lx -= 2;
+	lx -= speed;
     //Change the direction when it hits the wall
-    if (ly <= 0 || ly >= c.height-lheight)
+    if (ly >= c.height)
 	goingUp = !goingUp;
-    if (lx <= 0 || lx >= c.width-lwidth)
+    if (lx >= c.width+lwidth)
+	goingRight = !goingRight;
+    if (ly <= 0)
+	goingUp = !goingUp;
+    if (lx <= 0)
 	goingRight = !goingRight;
     //Change the direction when it hits the paddles
     if( lx-10 > x1 && lx-10 < x1+pwidth && ly > y1 && ly < y1+pheight )
@@ -106,12 +112,12 @@ function moveBall(){
 }
 
 function score(){
-    if (lx == 0){
+    if (lx < 10){
         p2score += 1;
         lx = 80;
         ly = y1 + 50;
     }
-    if (lx == c.width - 20){
+    if (lx > c.width - 5){
         p1score += 1;
         lx = 500;
         ly = y2 + 50;
