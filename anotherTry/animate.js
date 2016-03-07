@@ -19,6 +19,8 @@ var y2 = 100;
 var pwidth = 20;
 var pheight = 100;
 var requestId;
+var p1score = 0;
+var p2score = 0;
 
 var drawPaddle = function(x, y){
     ctx.beginPath();
@@ -43,16 +45,16 @@ var keys = [];
 
 function keysPressed(e){
     keys[e.keyCode] = true;
-    if (keys[38]){ //up
+    if (keys[38] && y2 > 5){ //up
 	y2-=15;
     }
-    if (keys[40]){ //down
+    if (keys[40] && y2 < 300){ //down
 	y2+=15;
     }
-    if (keys[87]){ //w
+    if (keys[87] && y1 > 5){ //w
 	y1-=15;
     }
-    if (keys[83]){ //s
+    if (keys[83] && y1 < 300){ //s
 	y1+=15;
     }
     //e.preventDefault();
@@ -103,6 +105,19 @@ function moveBall(){
     drawBall(lx, ly);
 }
 
+function score(){
+    if (lx == 0){
+        p2score += 1;
+        lx = 80;
+        ly = y1 + 50;
+    }
+    if (lx == c.width - 20){
+        p1score += 1;
+        lx = 500;
+        ly = y2 + 50;
+    }
+}
+
 //Method to call constantly
 function run(){
     window.cancelAnimationFrame(requestId);
@@ -112,6 +127,9 @@ function run(){
     moveBall();
     //Repeatedly draw the rect/paddle
     requestId = window.requestAnimationFrame(run);
+    score();
+    document.getElementById("p1score").innerHTML = "Player 1 score: " + p1score;
+    document.getElementById("p2score").innerHTML = "Player 2 score: " + p2score;
 };
 run();
 
