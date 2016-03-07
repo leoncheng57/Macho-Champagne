@@ -139,5 +139,19 @@ function run(){
 };
 run();
 
+function speedup(){
+    speed ++;
+}
+
+function speeddown(){
+    speed --;
+}
+
+var speedUp = document.getElementByID("speedup");
+var speedDown = document.getElementByID("speeddown");
+
+window.addEventListener("click", speedup);
+window.addEventListener("click", speeddown);
+
 
 console.log("gbye");
