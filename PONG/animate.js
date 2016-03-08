@@ -24,7 +24,7 @@ var p2score = 0;
 var speed = 3;
 items = []; //to store powerups, items
 
-/* DRAWING ON THE SCREEN */
+/* DRAWING PADDLE AND BALL */
 var drawPaddle = function(x, y){
     ctx.beginPath();
     ctx.fillStyle = "#ff6c24";
@@ -126,6 +126,26 @@ function score(){
     }
 }
 
+/* ITEMS */
+function genItems(){
+    var r = Math.floor((Math.random() * 10));
+    console.log(r);
+    if (r==0){
+	var coors = [];
+	coors[0] = Math.floor((Math.random()*300));
+	coors[1] = Math.floor((Math.random()*300));
+	items.push(coors);
+    };
+};
+
+function drawItems(){
+    var i;
+    for (i = 0; i<items.length; i++){
+	drawBall(i[0], i[1]);
+    }
+}
+
+
 /* RUN */
 //Method to call constantly
 function run(){
@@ -134,12 +154,14 @@ function run(){
     drawPaddle(x1, y1); //first paddle
     drawPaddle(x2, y2); //second paddle
     moveBall();
-    //Repeatedly draw the rect/paddle
-    requestId = window.requestAnimationFrame(run);
+    genItems();
+    drawItems();
+    requestId = window.requestAnimationFrame(run); //Repeatedly draw the rect/paddle
     score();
     document.getElementById("p1score").innerHTML = "Player 1 score: " + p1score;
     document.getElementById("p2score").innerHTML = "Player 2 score: " + p2score;
 };
+
 run();
 
 /* CHANGING SPEED */
