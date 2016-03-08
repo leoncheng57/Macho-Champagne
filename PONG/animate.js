@@ -22,7 +22,9 @@ var requestId;
 var p1score = 0;
 var p2score = 0;
 var speed = 3;
+items = []; //to store powerups, items
 
+/* DRAWING ON THE SCREEN */
 var drawPaddle = function(x, y){
     ctx.beginPath();
     ctx.fillStyle = "#ff6c24";
@@ -41,7 +43,7 @@ var drawBall = function(x, y){
     ctx.closePath();
 };
 
-// keys, keysPressed, keysReleased are used for keyboard actions
+/* KEYBOARD ACTIONS */
 var keys = [];
 
 function keysPressed(e){
@@ -69,8 +71,8 @@ function keysReleased(e){
 window.addEventListener("keydown", keysPressed);
 window.addEventListener("keyup", keysReleased);
 
-//CODE FOR LOGO
 
+/* BALL MOVEMENT */
 //Booleans to keep track of direction of movement
 var goingUp = false;
 var goingRight = true;
@@ -81,14 +83,13 @@ var lwidth = 20;
 var lx = c.width/2 - lwidth/2;
 var ly = c.height/2 - lheight/2;
 
-
 function moveBall(){
     //Move in vertical direction
     if (goingUp)
 	ly += speed;
     else
 	ly -= speed;
-    //Move in horizontal directoin
+    //Move in horizontal direction
     if (goingRight)
 	lx += speed;
     else
@@ -111,6 +112,7 @@ function moveBall(){
     drawBall(lx, ly);
 }
 
+/* SCORE */
 function score(){
     if (lx < 10){
         p2score += 1;
@@ -124,6 +126,7 @@ function score(){
     }
 }
 
+/* RUN */
 //Method to call constantly
 function run(){
     window.cancelAnimationFrame(requestId);
@@ -139,6 +142,7 @@ function run(){
 };
 run();
 
+/* CHANGING SPEED */
 function speedup(){
     speed ++;
 }
