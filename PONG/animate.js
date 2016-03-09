@@ -163,7 +163,7 @@ function run(){
     document.getElementById("p2score").innerHTML = "Player 2 score: " + p2score;
 };
 
-run();
+//run();
 
 /* CHANGING SPEED */
 function speedup(){
@@ -176,9 +176,11 @@ function speeddown(){
 
 var speedUp = document.getElementById("speedup");
 var speedDown = document.getElementById("speeddown");
+var start = document.getElementById("start");
+
 
 speedUp.addEventListener("click", speedup);
 speedDown.addEventListener("click", speeddown);
-
+start.addEventListener("click",run);
 
 console.log("gbye");
