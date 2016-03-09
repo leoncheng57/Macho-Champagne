@@ -48,10 +48,10 @@ var keys = [];
 
 function keysPressed(e){
     keys[e.keyCode] = true;
-    if (keys[38] && y2 > 5){ //up
+    if (keys[79] && y2 > 5){ //o
 	y2-=15;
     }
-    if (keys[40] && y2 < 300){ //down
+    if (keys[76] && y2 < 300){ //l
 	y2+=15;
     }
     if (keys[87] && y1 > 5){ //w
@@ -134,15 +134,15 @@ function genItems(){
 	coors[0] = Math.floor((Math.random()*300));
 	coors[1] = Math.floor((Math.random()*300));
 	items[items.length-1] = coors;
-	console.log(coors);
     };
 };
 
 function drawItems(){
+    console.log("hello");
     var i;
     for (i = 0; i<items.length; i++){
-	console.log(i[0] + ", " + i[1]);
-	drawBall(i[0], i[1]);
+	console.log(items[i][0] + ", " + items[i][1]);
+	drawBall(items[i][0], items[i][1]);
     }
 }
 
