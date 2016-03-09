@@ -129,18 +129,19 @@ function score(){
 /* ITEMS */
 function genItems(){
     var r = Math.floor((Math.random() * 10));
-    console.log(r);
     if (r==0){
 	var coors = [];
 	coors[0] = Math.floor((Math.random()*300));
 	coors[1] = Math.floor((Math.random()*300));
-	items.push(coors);
+	items[items.length-1] = coors;
+	console.log(coors);
     };
 };
 
 function drawItems(){
     var i;
     for (i = 0; i<items.length; i++){
+	console.log(i[0] + ", " + i[1]);
 	drawBall(i[0], i[1]);
     }
 }
