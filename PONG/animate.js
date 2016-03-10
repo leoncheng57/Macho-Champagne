@@ -172,11 +172,15 @@ function pause(){
 
 function setup() {
 	window.cancelAnimationFrame(requestId);
+	p1score = 0;
+	p2score = 0;
     clearScreen();
     drawPaddle(x1, y1); //first paddle
     drawPaddle(x2, y2); //second paddle
+	drawBall(lx, ly);
 }
 
+document.onload = setup();
 var startButton = document.getElementById("start");
 startButton.addEventListener("click",run); //initiates everything!
 var pauseButton = document.getElementById("pause");
