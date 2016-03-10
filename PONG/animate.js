@@ -22,6 +22,7 @@ var requestId;
 var p1score = 0;
 var p2score = 0;
 var speed = 3;
+var iradius = 7; //radius of an item
 items = []; //to store powerups, items
 
 /* DRAWING ON THE CANVAS */
@@ -46,7 +47,7 @@ var drawBall = function(x, y){
 var drawItem = function(x, y){
     ctx.beginPath();
     ctx.fillStyle = "#2172ea";
-    ctx.arc(x, y, 7, 0, 2*Math.PI);
+    ctx.arc(x, y, iradius, 0, 2*Math.PI);
     ctx.stroke();
     ctx.fill();
     ctx.closePath();
@@ -153,6 +154,16 @@ function drawAllItems(){
     }
 }
 
+function itemCollision(){
+    for (i = 0; i<items.length; i++){
+	x = items[i][0];
+	y = items[i][1];
+	var r = iradius;
+	//x-r, x+r
+	//y-r, y+r
+	//*TODO*: FINISH THIS
+    }
+}
 
 /* RUN */
 //Method to call constantly
@@ -179,6 +190,8 @@ function setup() {
     clearScreen();
     drawPaddle(x1, y1); //first paddle
     drawPaddle(x2, y2); //second paddle
+    lx = c.width/2 - lwidth/2;
+    ly = c.height/2 - lheight/2;
     drawBall(lx, ly);
 }
 
