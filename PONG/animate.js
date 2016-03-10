@@ -24,7 +24,7 @@ var p2score = 0;
 var speed = 3;
 items = []; //to store powerups, items
 
-/* DRAWING PADDLE AND BALL */
+/* DRAWING ON THE CANVAS */
 var drawPaddle = function(x, y){
     ctx.beginPath();
     ctx.fillStyle = "#ff6c24";
@@ -38,6 +38,15 @@ var drawBall = function(x, y){
     ctx.beginPath();
     ctx.fillStyle = "#ff6c24";
     ctx.arc(x, y, 10, 0, 2*Math.PI);
+    ctx.stroke();
+    ctx.fill();
+    ctx.closePath();
+};
+
+var drawItem = function(x, y){
+    ctx.beginPath();
+    ctx.fillStyle = "#2172ea";
+    ctx.arc(x, y, 7, 0, 2*Math.PI);
     ctx.stroke();
     ctx.fill();
     ctx.closePath();
@@ -130,24 +139,19 @@ function score(){
 
 /* ITEMS */
 function genItems(){
-    var r = Math.floor((Math.random() * 10));
+    var r = Math.floor((Math.random() * 50));
     if (r==0){
 	var coors = [];
-	coors[0] = Math.floor((Math.random()*300));
-	coors[1] = Math.floor((Math.random()*300));
-	items[items.length-1] = coors;
-	console.log(items[items.length-1]);
+	coors[0] = Math.floor((Math.random()*600));
+	coors[1] = Math.floor((Math.random()*400));
+	items[items.length] = coors;
     };
-    console.log(items);
 };
 
-function drawItems(){
-    //console.log("hello");
+function drawAllItems(){
     var i;
     for (i = 0; i<items.length; i++){
-	console.log("hello");
-	console.log(items[i][0] + ", " + items[i][1]);
-	drawBall(items[i][0], items[i][1]);
+	drawItem(items[i][0], items[i][1]);
     }
 }
 
@@ -156,20 +160,18 @@ function drawItems(){
 //Method to call constantly
 function run(){
     window.cancelAnimationFrame(requestId);
-    console.log(requestId);
     clearScreen();
     drawPaddle(x1, y1); //first paddle
     drawPaddle(x2, y2); //second paddle
     moveBall();
     genItems();
-    drawItems();
+    drawAllItems();
     score();
     requestId = window.requestAnimationFrame(run); //Repeatedly draw the rect/paddle
 };
 
 function stop(){
     window.cancelAnimationFrame(requestId);
-    console.log("stopping");
 };
 
 var startButton = document.getElementById("start");
