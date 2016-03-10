@@ -124,6 +124,8 @@ function score(){
         lx = 500;
         ly = y2 + 50;
     }
+    document.getElementById("p1score").innerHTML = "Player 1 score: " + p1score;
+    document.getElementById("p2score").innerHTML = "Player 2 score: " + p2score;
 }
 
 /* ITEMS */
@@ -134,13 +136,16 @@ function genItems(){
 	coors[0] = Math.floor((Math.random()*300));
 	coors[1] = Math.floor((Math.random()*300));
 	items[items.length-1] = coors;
+	console.log(items[items.length-1]);
     };
+    console.log(items);
 };
 
 function drawItems(){
-    console.log("hello");
+    //console.log("hello");
     var i;
     for (i = 0; i<items.length; i++){
+	console.log("hello");
 	console.log(items[i][0] + ", " + items[i][1]);
 	drawBall(items[i][0], items[i][1]);
     }
@@ -151,19 +156,27 @@ function drawItems(){
 //Method to call constantly
 function run(){
     window.cancelAnimationFrame(requestId);
+    console.log(requestId);
     clearScreen();
     drawPaddle(x1, y1); //first paddle
     drawPaddle(x2, y2); //second paddle
     moveBall();
     genItems();
     drawItems();
-    requestId = window.requestAnimationFrame(run); //Repeatedly draw the rect/paddle
     score();
-    document.getElementById("p1score").innerHTML = "Player 1 score: " + p1score;
-    document.getElementById("p2score").innerHTML = "Player 2 score: " + p2score;
+    requestId = window.requestAnimationFrame(run); //Repeatedly draw the rect/paddle
 };
 
-//run();
+function stop(){
+    window.cancelAnimationFrame(requestId);
+    console.log("stopping");
+};
+
+var startButton = document.getElementById("start");
+startButton.addEventListener("click",run); //initiates everything!
+var stopButton = document.getElementById("stop");
+stopButton.addEventListener("click", stop);
+
 
 /* CHANGING SPEED */
 function speedup(){
@@ -176,11 +189,7 @@ function speeddown(){
 
 var speedUp = document.getElementById("speedup");
 var speedDown = document.getElementById("speeddown");
-var start = document.getElementById("start");
-
-
 speedUp.addEventListener("click", speedup);
 speedDown.addEventListener("click", speeddown);
-start.addEventListener("click",run);
 
 console.log("gbye");
