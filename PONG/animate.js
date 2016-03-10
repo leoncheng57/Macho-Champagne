@@ -157,6 +157,9 @@ function drawAllItems(){
 /* RUN */
 //Method to call constantly
 function run(){
+    clearScreen();
+    drawPaddle(x1, y1); //first paddle
+    drawPaddle(x2, y2); //second paddle
     moveBall();
     drawBall(lx, ly);
     genItems();
@@ -170,13 +173,13 @@ function pause(){
 };
 
 function setup() {
-	window.cancelAnimationFrame(requestId);
-	p1score = 0;
-	p2score = 0;
+    window.cancelAnimationFrame(requestId);
+    p1score = 0;
+    p2score = 0;
     clearScreen();
     drawPaddle(x1, y1); //first paddle
     drawPaddle(x2, y2); //second paddle
-	drawBall(lx, ly);
+    drawBall(lx, ly);
 }
 
 document.onload = setup();
