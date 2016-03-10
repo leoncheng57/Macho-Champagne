@@ -159,10 +159,6 @@ function drawAllItems(){
 /* RUN */
 //Method to call constantly
 function run(){
-    window.cancelAnimationFrame(requestId);
-    clearScreen();
-    drawPaddle(x1, y1); //first paddle
-    drawPaddle(x2, y2); //second paddle
     moveBall();
     genItems();
     drawAllItems();
@@ -170,14 +166,23 @@ function run(){
     requestId = window.requestAnimationFrame(run); //Repeatedly draw the rect/paddle
 };
 
-function stop(){
+function pause(){
     window.cancelAnimationFrame(requestId);
 };
 
+function setup() {
+	window.cancelAnimationFrame(requestId);
+    clearScreen();
+    drawPaddle(x1, y1); //first paddle
+    drawPaddle(x2, y2); //second paddle
+}
+
 var startButton = document.getElementById("start");
 startButton.addEventListener("click",run); //initiates everything!
-var stopButton = document.getElementById("stop");
-stopButton.addEventListener("click", stop);
+var pauseButton = document.getElementById("pause");
+pauseButton.addEventListener("click", pause);
+var restartButton = document.getElementById("restart");
+restartButton.addEventListener("click",setup);
 
 
 /* CHANGING SPEED */
