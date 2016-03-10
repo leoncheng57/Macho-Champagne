@@ -117,8 +117,6 @@ function moveBall(){
 	goingRight = !goingRight;
     if( lx+10 > x2 && lx+10 < x2+pwidth && ly > y2 && ly < y2+pheight ) //note: the +10 is to detect the right side of the ball
 	goingRight = !goingRight;
-    //Draw the image
-    drawBall(lx, ly);
 }
 
 /* SCORE */
@@ -160,6 +158,7 @@ function drawAllItems(){
 //Method to call constantly
 function run(){
     moveBall();
+    drawBall(lx, ly);
     genItems();
     drawAllItems();
     score();
