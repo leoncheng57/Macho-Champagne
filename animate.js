@@ -188,9 +188,15 @@ function itemCollision(){
 	   ly < y+r && ly > y-r)
 	{
 	    items.splice(i, 1);
-	    speed+=0.5;
+	    speed+=0.7;
 	    console.log("collision");
 	}
+    }
+}
+
+function removeItems(){
+    if (items.length>2){
+	items.splice(0, 1);
     }
 }
 
@@ -210,12 +216,13 @@ function run(){
     genItems();
     drawAllItems();
     itemCollision();
+    removeItems();
     score();
     
     /* for redrawing ball after score*/
     clearScreen();
-    drawPaddle(x1, y1); //first paddle
-    drawPaddle(x2, y2); //second paddle
+    drawPaddle(x1, y1);
+    drawPaddle(x2, y2);
     drawBall(lx, ly);
     genItems();
     drawAllItems();
@@ -238,8 +245,8 @@ function setup() {
     var x2 = 520;
     var y2 = 150;
     clearScreen();
-    drawPaddle(x1, y1); //first paddle
-    drawPaddle(x2, y2); //second paddle
+    drawPaddle(x1, y1);
+    drawPaddle(x2, y2);
     lx = c.width/2 - lwidth/2;
     ly = c.height/2 - lheight/2 + 150;
     drawBall(lx, ly);
