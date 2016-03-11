@@ -56,6 +56,8 @@ var drawItem = function(x, y){
 /* KEYBOARD ACTIONS */
 var keys = [];
 
+var spacekey = 0; //Decides whether or not space starts or pauses
+
 function keysPressed(e){
     keys[e.keyCode] = true;
     if (keys[79] && y2 > 5){ //o
@@ -69,6 +71,14 @@ function keysPressed(e){
     }
     if (keys[83] && y1 < 300){ //s
 	y1+=15;
+    }
+    if (keys[32] && spacekey == 0){ //s
+        run();
+        keysReleased();
+    }
+    if (keys[32] && spacekey == 1){ //s
+        pause();
+        keysReleased();
     }
     //e.preventDefault();
 }
@@ -182,6 +192,7 @@ function itemCollision(){
 /* RUN */
 //Method to call constantly
 function run(){
+    spacekey = 1;
     if (pauseOrNah == 1){
         sleep(1000);
     }
@@ -209,6 +220,7 @@ function run(){
 
 function pause(){
     window.cancelAnimationFrame(requestId);
+    spacekey = 0;
 };
 
 function setup() {
@@ -223,7 +235,7 @@ function setup() {
     drawPaddle(x1, y1); //first paddle
     drawPaddle(x2, y2); //second paddle
     lx = c.width/2 - lwidth/2;
-    ly = c.height/2 - lheight/2;
+    ly = c.height/2 - lheight/2 + 150;
     drawBall(lx, ly);
 	ctx.font = "30px Arial";
 	ctx.fillStyle = "black";
@@ -231,9 +243,10 @@ function setup() {
 	ctx.fillText("WELCOME TO PONG",pwidth + 250,pheight/2);
 	ctx.fillText("Brought to you by Team Macho Champagne",pwidth + 280,pheight/2 + 50);
 	ctx.font = "24px Arial";
-	ctx.fillText("Instructions:",pwidth + 250,pheight/2 + 100);
+	ctx.fillText("Instructions:",pwidth + 250,pheight/2 + 95);
 	ctx.fillText("Right Paddle: O/L Keys ",pwidth + 250,pheight/2 + 120);
-	ctx.fillText("Left Paddle: W/S Keys ",pwidth + 250,pheight/2 + 140);
+	ctx.fillText("Left Paddle: W/S Keys ",pwidth + 250,pheight/2 + 145);
+    ctx.fillText("Press Space to Start and Pause",pwidth + 250,pheight/2 + 170);
 }
 
 document.onload = setup();
