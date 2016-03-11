@@ -120,6 +120,7 @@ function moveBall(){
 	goingRight = !goingRight;
 }
 
+var pauseOrNah = 0;
 
 /* SCORE */
 function score(){
@@ -128,15 +129,15 @@ function score(){
         lx = 80;
         ly = y1 + 50;
         drawBall(lx, ly);
-        sleep(1000);
+        pauseOrNah = 1;
 
     }
     if (lx > c.width - 5){
         p1score += 1;
-        lx = 500;
+        lx = 510;
         ly = y2 + 50;
         drawBall(lx, ly);
-        sleep(1000);
+        pauseOrNah = 1;
 
     }
     document.getElementById("p1score").innerHTML = p1score;
@@ -181,6 +182,10 @@ function itemCollision(){
 /* RUN */
 //Method to call constantly
 function run(){
+    if (pauseOrNah == 1){
+        sleep(1000);
+    }
+    pauseOrNah = 0;
     clearScreen();
     drawPaddle(x1, y1); //first paddle
     drawPaddle(x2, y2); //second paddle
@@ -189,6 +194,16 @@ function run(){
     genItems();
     drawAllItems();
     score();
+
+    /* for redrawing ball after score*/
+    clearScreen();
+    drawPaddle(x1, y1); //first paddle
+    drawPaddle(x2, y2); //second paddle
+    drawBall(lx, ly);
+    genItems();
+    drawAllItems();
+    /*---------*/
+
     requestId = window.requestAnimationFrame(run); //Repeatedly draw the rect/paddle
 };
 
