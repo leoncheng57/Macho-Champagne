@@ -139,8 +139,8 @@ function score(){
         sleep(1000);
 
     }
-    document.getElementById("p1score").innerHTML = "Player 1 score: " + p1score;
-    document.getElementById("p2score").innerHTML = "Player 2 score: " + p2score;
+    document.getElementById("p1score").innerHTML = p1score;
+    document.getElementById("p2score").innerHTML = p2score;
 }
 
 /* Stops Game for given amount of milliseconds */
@@ -200,12 +200,25 @@ function setup() {
     window.cancelAnimationFrame(requestId);
     p1score = 0;
     p2score = 0;
+	var x1 = 50;
+	var y1 = 100;
+	var x2 = 520;
+	var y2 = 100;
     clearScreen();
     drawPaddle(x1, y1); //first paddle
     drawPaddle(x2, y2); //second paddle
     lx = c.width/2 - lwidth/2;
     ly = c.height/2 - lheight/2;
     drawBall(lx, ly);
+	ctx.font = "30px Arial";
+	ctx.fillStyle = "black";
+	ctx.textAlign = "center";
+	ctx.fillText("WELCOME TO PONG",pwidth + 250,pheight/2);
+	ctx.fillText("Brought to you by Team Macho Champagne",pwidth + 280,pheight/2 + 50);
+	ctx.font = "24px Arial";
+	ctx.fillText("Instructions:",pwidth + 250,pheight/2 + 100);
+	ctx.fillText("Right Paddle: O/L Keys ",pwidth + 250,pheight/2 + 120);
+	ctx.fillText("Left Paddle: W/S Keys ",pwidth + 250,pheight/2 + 140);
 }
 
 document.onload = setup();

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> Keyboard + JS </title> </head>
+    <title>PONG!</title> </head>
   <body>
     <!-- DETAILS -->
     <h1>WELCOME TO PONG</h1>
@@ -19,6 +19,11 @@
     <br>
     <br>
 
+	<div>
+		<p>PLAYER 1 SCORE: <span id="p1score"></span></p>
+		<p>PLAYER 2 SCORE: <span id="p2score"></span></p>
+	</div>
+	
     <!-- CANVAS STUFF -->
     <canvas id="pad" height="400"
 	    width="600" style="border: 1px solid;">
@@ -29,10 +34,6 @@
     
     <button type="button" id="speedup">Speed Up</button>
     <button type="button" id="speeddown">Slow Down</button>
-    
-
-    <p id="p1score"></p>
-    <p id="p2score"></p>
 
   </body>
   <script src="animate.js"></script>
