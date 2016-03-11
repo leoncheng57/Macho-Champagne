@@ -120,20 +120,33 @@ function moveBall(){
 	goingRight = !goingRight;
 }
 
+
 /* SCORE */
 function score(){
     if (lx < 10){
         p2score += 1;
         lx = 80;
         ly = y1 + 50;
+        drawBall(lx, ly);
+        sleep(1000);
+
     }
     if (lx > c.width - 5){
         p1score += 1;
         lx = 500;
         ly = y2 + 50;
+        drawBall(lx, ly);
+        sleep(1000);
+
     }
     document.getElementById("p1score").innerHTML = "Player 1 score: " + p1score;
     document.getElementById("p2score").innerHTML = "Player 2 score: " + p2score;
+}
+
+/* Stops Game for given amount of milliseconds */
+function sleep(delay) {
+    var start = new Date().getTime();
+    while (new Date().getTime() < start + delay);
 }
 
 /* ITEMS */
